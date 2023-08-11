@@ -30,35 +30,18 @@ public class AutoHealingTest extends BaseTest {
         webDriverWait = new WebDriverWait(driver,
                 Duration.ofSeconds(ELEM_TIMEOUT_DUR));
         jsExecutor = (JavascriptExecutor) driver;
+        /* Not a good practice, used for testing */
         actionChains = new Actions(driver);
         driver.get(testURL);
 
         driver.manage().window().maximize();
+        /* Recommend using explicit wait */
+        /* Blocking wait used only for testing */
         Thread.sleep(2000);
     }
 
-    @Test(description = "Test 1: Auto Healing on LambdaTest", enabled=true)
-    public void testAutoHealingCloud() throws InterruptedException
-    {
-        WebDriver driver = getDriver();
-        try
-        {
-            WebElement searchBoxActual = driver.findElement(By.id("nav-search-submit-button"));
-            jsExecutor.executeScript
-                    ("document.getElementById('nav-search-submit-button').id='amazonsearchbox'");
-            WebElement searchBoxHeal = driver.findElement(By.id("nav-search-submit-button"));
-            Assert.assertEquals(searchBoxActual, searchBoxHeal,
-                    "Elements not equal");
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            status = "failed";
-        }
-        Thread.sleep(2000);
-    }
-
-    @Test(description = "Test 1: Auto Healing on LambdaTest", enabled=true)
+    @Test(description = "Test 1: Auto Healing on LambdaTest - Ecommerce Registration Page",
+            enabled=true)
     public void testAutoHealing_ecommerce_cart() throws InterruptedException
     {
         WebDriver driver = getDriver();
@@ -83,11 +66,6 @@ public class AutoHealingTest extends BaseTest {
 
             Thread.sleep(1000);
 
-            /* Some issue with the healing logic, to be tried later
-                jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
-                elemMacBook, "xpath", newXPath);
-             */
-
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", elemMacBook);
             Thread.sleep(500);
 
@@ -101,25 +79,19 @@ public class AutoHealingTest extends BaseTest {
                 e.printStackTrace();
             }
 
+            /* Works Fine, instead I used XPath * /
             WebElement elemQuickView = driver.findElement(By.cssSelector(
                     ".quick-view-44"));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemQuickView));
-
-            /* Try these experiments once the healing logic is fixed */
-            /* Experiment - 1: Change the Class Name of quick-view-44 & use the same in code */
-            /*
-            jsExecutor.executeScript(
-                            "document.getElementsByClassName('quick-view-44')[0].className='macbook-air-view'");
              */
-            /* Experiment - 2: Change the ID of quick-view-44 & use the same in code */
-            /*
+
             jsExecutor.executeScript(
-                    "arguments[0].setAttribute('id', arguments[1]);", elemQuickView, newProductId
-            );
-            WebElement elemNewQuickView =
-                    webDriverWait.until(ExpectedConditions.elementToBeClickable(
-                    By.id(newProductId)));
-            */
+                    "document.getElementsByClassName('btn btn-quick-view quick-view-44')[0].className=" +
+                            "'btn btn-quick-view quick-view-99'");
+
+            WebElement elemQuickView = driver.findElement(By.xpath(
+                    "//button[@class='btn btn-quick-view quick-view-44']"));
+            webDriverWait.until(ExpectedConditions.elementToBeClickable(elemQuickView));
 
             Thread.sleep(1000);
             elemQuickView.click();
@@ -129,17 +101,13 @@ public class AutoHealingTest extends BaseTest {
                     "entry_212965"));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemBuyNowButton));
 
-            /* Auto-Healing works with id */
+            /* Change the ID and than auot-heal with the original ID */
             jsExecutor.executeScript
                     ("document.getElementById('entry_212965').id='buy_later'");
 
-            /* elemBuyNowButton = driver.findElement(By.cssSelector(".btn-buynow"); */
-            /* elemBuyNowButton = driver.findElement(By.cssSelector(
-                    ".text.btn.btn-md.btn-primary.btn-block.btn-buynow.button-buynow.cart-44"));
-             */
-
-            /* Reference - https://www.shecodes.io/athena/1902-how-to-set-javascript-attribute-with-setattribute */
-            /* jsExecutor.executeScript("document.getElementById('entry_212965').title='BUY LATER'"); */
+            /* Change the innerText of the Button, only for Testing */
+            jsExecutor.executeScript(
+                    "document.getElementsByClassName('text btn btn-md btn-primary btn-block btn-buynow button-buynow cart-44')[0].innerText='BUY LATER'");
 
             Thread.sleep(2000);
 
@@ -151,6 +119,10 @@ public class AutoHealingTest extends BaseTest {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemContinueButton));
 
             /* We can do some checks later, raise assert if failure */
+            String curURL = driver.getCurrentUrl();
+            boolean statusURL = curURL.contains("checkout");
+            Assert.assertTrue(statusURL,
+                    "Checkout page is displayed");
         }
         catch (Exception e)
         {
@@ -160,9 +132,9 @@ public class AutoHealingTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(description = "Test 1: Auto-Healing on E-Commerce Playground Registration Page",
+    @Test(description = "Test 2: Auto-Healing on E-Commerce Playground Registration Page",
           enabled=true)
-    public void testautoheal_ecomm_registration() throws InterruptedException
+    public void testAutoHealing_ecomm_registration() throws InterruptedException
     {
         WebDriver driver = getDriver();
 
@@ -182,20 +154,24 @@ public class AutoHealingTest extends BaseTest {
             /* New: name - email-address */
             By newEmailAddr = By.id("email-address");
             WebElement tempElement = driver.findElement(newEmailAddr);
-            tempElement.sendKeys("teaddressnicehimansnice1@email.com");
+            tempElement.sendKeys("testingemail1@gmail.com");
 
-            Thread.sleep(3000);
+            /* Not a good practice, should be avoided. Used only for testing */
+            Thread.sleep(1000);
 
             /* If auto-healing is applied, below mail will be entered in the said location */
             WebElement elemEmail = driver.findElement(By.id("input-email"));
             elemEmail.clear();
-            Thread.sleep(2000);
-            elemEmail.sendKeys("teaddresshimanshunewoneworkssssss@gmail.com");
+            Thread.sleep(1000);
+            elemEmail.sendKeys("testingemail2@gmail.com");
 
             Thread.sleep(1000);
 
             WebElement elemTel = driver.findElement(By.xpath("//input[@id='input-telephone']"));
             elemTel.sendKeys("12345678");
+
+            jsExecutor.executeScript
+                    ("document.getElementsByName('password')[0].name='password-new'");
 
             WebElement elemPass = driver.findElement(By.name("password"));
             elemPass.sendKeys("password");
@@ -209,7 +185,7 @@ public class AutoHealingTest extends BaseTest {
             /* Only for testing, verify if the selector has changed from: */
             /* Old: id - input-newsletter-yes */
             /* New: name - input-newsletter-dont-know */
-            By newNewsletter = By.id("input-newsletter-dont-know");
+            By newNewsletter = By.id("input-newsletter-yes");
             WebElement tempElementNewsletter = driver.findElement(newNewsletter);
             jsExecutor.executeScript("arguments[0].checked = true;",
                     tempElementNewsletter);
@@ -239,7 +215,6 @@ public class AutoHealingTest extends BaseTest {
             boolean statusURL = curURL.contains("contains");
             Assert.assertFalse(statusURL,
                     "Success URL is not displayed");
-
         }
         catch (Exception e)
         {
@@ -249,36 +224,31 @@ public class AutoHealingTest extends BaseTest {
         Thread.sleep(2000);
     }
 
-    @Test(description = "Test 1: Auto Healing on LambdaTest", enabled=true)
-    public void testautoheal_local_page() throws InterruptedException
+    @Test(description = "Test 3: [Local Page] Auto Healing on LambdaTest", enabled=true)
+    public void testAutoHealing_local_page() throws InterruptedException
     {
         WebDriver driver = getDriver();
 
         try
         {
+            /* Healing 1 : Change the ID of the Sign-up button */
+            jsExecutor.executeScript
+                    ("document.getElementById('signUp').id='signUp-Button'");
+
             WebElement elemSignUp = driver.findElement(By.id("signUp"));
             elemSignUp.click();
 
-            //jsExecutor.executeScript
-            //        ("document.getElementById('signUp').id='signUp-Button'");
-
+            /* Healing 2 : Name of the text-box is changed from first-name to first-name-new */
             WebElement elemFirstName = driver.findElement(By.name("first-name"));
             webDriverWait.until(ExpectedConditions.visibilityOf(elemFirstName));
 
-            /*
-            jsExecutor.executeScript(
-                    "document.getElementById('firstname').setAttribute('className', 'fname')");
+            /* Clear the existing text and enter the details */
+            elemFirstName.clear();
+            elemFirstName.sendKeys("Himanshu Blogger");
 
-            jsExecutor.executeScript
-                    ("document.getElementsByName('first-name')[0].name='fname'");
-            */
+            Thread.sleep(2000);
 
-            WebElement elemActFirstName = driver.findElement(By.name("first-name"));
-            elemActFirstName.clear();
-            elemActFirstName.sendKeys("Himanshu Blogger");
-
-            Thread.sleep(5000);
-
+            /* Scenario 2: The iFrame contains the page where the ID's are changed */
             driver.get("http://localhost:8080/iframe.html");
 
             webDriverWait.until(d -> ((JavascriptExecutor) driver).
@@ -288,11 +258,42 @@ public class AutoHealingTest extends BaseTest {
             driver.switchTo().frame("iframe_1");
             Thread.sleep(2000);
 
+            /* Healing 3 : ID of the button was changed earlier */
             WebElement elemSignUpButton = driver.findElement(By.id("signUp"));
             elemSignUpButton.click();
 
-            WebElement elemiModFirstName = driver.findElement(By.name("first-name"));
-            elemiModFirstName.sendKeys("Sheth");
+            /* Healing 4 : Name of the button was changed in the base HTML file */
+            WebElement elemModFirstName = driver.findElement(By.name("first-name"));
+            elemModFirstName.sendKeys("Himanshu Sheth");
+
+            /* Change the name of the Email text-box, healing will be done in index.html */
+            /* This is because the parent page is in the iFrame */
+            jsExecutor.executeScript
+                    ("document.getElementsByClassName('email-address')[0].name='mail'");
+
+            WebElement elemEmail = driver.findElement(By.name("mail"));
+            elemEmail.sendKeys("himanshu.blogger@gmail.com");
+            Thread.sleep(500);
+
+            /* Change the ClassName of the password field, healing will not be done */
+            /* This is because the parent page is in the iFrame */
+            jsExecutor.executeScript
+                    ("document.getElementsByName('password')[0].className='new-password'");
+
+            WebElement elemNewPwd = driver.findElement(By.className("new-password"));
+            elemNewPwd.sendKeys("Password");
+            Thread.sleep(500);
+
+            /* Click Sign-up button */
+            elemSignUpButton = driver.findElement(By.cssSelector(".sign-up-container button"));
+            elemSignUpButton.click();
+
+            Thread.sleep(3000);
+
+            String curURL = driver.getPageSource();
+            boolean statusURL = curURL.contains("SignUp iFrame");
+            Assert.assertFalse(statusURL,
+                    "Sign Up was not successful");
         }
         catch (Exception e)
         {

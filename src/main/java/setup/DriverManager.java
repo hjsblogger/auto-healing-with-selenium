@@ -21,10 +21,13 @@ public class DriverManager
 {
     private static final ThreadLocal<WebDriver> driverLocal = new ThreadLocal<> ();
     /* Get UserName and Access Key from https://accounts.lambdatest.com/security */
-    private static final String LT_USERNAME= System.getenv("LT_USERNAME") == null ?
-            "himanshu" : System.getenv("LT_USERNAME");
-    private static final String LT_ACCESS_KEY = System.getenv("LT_ACCESS_KEY") == null ?
-            "Ia1Miq" : System.getenv("LT_ACCESS_KEY");
+    /* Use getEnv if env variables are exported using export or set */
+    private static final String LT_USERNAME= System.getenv("LT_USERNAME");
+    private static final String LT_ACCESS_KEY = System.getenv("LT_ACCESS_KEY");
+    /* Use System.getProperty if env variables are set using the mvn command-line */
+    /* This helped https://stackoverflow.com/a/5525589/126105 */
+    // private static final String LT_USERNAME= System.getProperty("LT_USERNAME");
+    // private static final String LT_ACCESS_KEY = System.getProperty("LT_ACCESS_KEY");
     private static final String GRID_URL = "@hub.lambdatest.com/wd/hub";
     public static String status = "passed";
 
@@ -81,8 +84,8 @@ public class DriverManager
         ltOptions.put ("accessKey", LT_ACCESS_KEY);
         /* ltOptions.put ("selenium_version", "3.141.0"); */
         ltOptions.put ("resolution", "2560x1440");
-        ltOptions.put ("build", "[Build] Auto-Healing Functionality");
-        ltOptions.put ("name", "[Name] Auto-Healing Functionality");
+        ltOptions.put ("build", "[Build] Demo: Auto-healing using Selenium on LambdaTest");
+        ltOptions.put ("name", "Demo: Auto-healing using Selenium on LambdaTest");
         ltOptions.put ("project", "[Project] Auto-Healing Functionality");
         ltOptions.put ("plugin", "java-testNG");
         ltOptions.put("ACCEPT_INSECURE_CERTS", false);

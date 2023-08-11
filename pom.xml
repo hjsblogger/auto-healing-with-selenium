@@ -103,9 +103,15 @@
                                 org.uncommons.reportng.JUnitXMLReporter
                             </value>
                         </property> </properties>
+                    <!-- Trigger file from command-line -->
+                    <!--<suiteXmlFiles>
+                        <suiteXmlFile>testng_autohealing.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    -->
+
                     <suiteXmlFiles>
-                        <!-- TestNG suite XML files -->
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <!-- pass testng.xml files as argument from command line -->
+                        <suiteXmlFile>${suiteXml}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

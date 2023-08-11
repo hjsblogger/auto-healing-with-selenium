@@ -7,18 +7,7 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
 
-    <test name="Auto Healing on Amazon" enabled="false">
-        <parameter name="browser" value="remote-chrome"/>
-        <parameter name="testurl" value="https://www.amazon.com"/>
-        <classes>
-            <class name="AutoHealingTest">
-                <methods>
-                    <include name="testAutoHealingCloud"/>
-                </methods>
-            </class>
-        </classes>
-    </test> <!-- Test -->
-
+    <!-- Complete -->
     <test name="Auto Healing on LambdaTest - 1" enabled="true">
         <parameter name="browser" value="remote-chrome"/>
         <parameter name="testurl"
@@ -26,20 +15,21 @@
         <classes>
             <class name="AutoHealingTest">
                 <methods>
-                    <include name="testautoheal_ecomm_registration"/>
+                    <include name="testAutoHealing_ecomm_registration"/>
                 </methods>
             </class>
         </classes>
     </test> <!-- Test -->
 
+    <!-- Complete -->
     <test name="Auto Healing on LambdaTest - 2" enabled="true">
         <parameter name="browser" value="remote-chrome"/>
         <parameter name="testurl"
-                   value="http://localhost:8080/index.html"/>
+                   value="https://ecommerce-playground.lambdatest.io/index.php?route=product/category&amp;path=57"/>
         <classes>
             <class name="AutoHealingTest">
                 <methods>
-                    <include name="testautoheal_local_page"/>
+                    <include name="testAutoHealing_ecommerce_cart"/>
                 </methods>
             </class>
         </classes>
@@ -48,11 +38,11 @@
     <test name="Auto Healing on LambdaTest - 3" enabled="true">
         <parameter name="browser" value="remote-chrome"/>
         <parameter name="testurl"
-                   value="https://ecommerce-playground.lambdatest.io/index.php?route=product/category&amp;path=57"/>
+                   value="http://localhost:8080/index.html"/>
         <classes>
             <class name="AutoHealingTest">
                 <methods>
-                    <include name="testAutoHealing_ecommerce_cart"/>
+                    <include name="testAutoHealing_local_page"/>
                 </methods>
             </class>
         </classes>
