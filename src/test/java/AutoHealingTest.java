@@ -62,7 +62,7 @@ public class AutoHealingTest extends BaseTest {
 
             /* New locator works, healed logic is not working fine. This needs to be commented later */
             WebElement elemMacBook = driver.findElement(By.id(
-                    "macbook-air-id"));
+                    "mz-product-grid-image-44-212408"));
 
             Thread.sleep(1000);
 
