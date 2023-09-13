@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="[Demo] Auto-Healing on LambdaTest" parallel="tests" thread-count="4">
+<!-- <suite name="[Demo] Auto-Healing on LambdaTest"> -->
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <!-- Complete -->
+    <test name="Auto Healing on LambdaTest - 1" enabled="true">
+        <parameter name="browser" value="remote-chrome"/>
+        <parameter name="testurl"
+                   value="https://ecommerce-playground.lambdatest.io/index.php?route=account/register"/>
+        <classes>
+            <class name="OrgTest">
+                <methods>
+                    <include name="testAutoHealing_ecomm_registration"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+
+    <!-- Complete -->
+    <test name="Auto Healing on LambdaTest - 2" enabled="true">
+        <parameter name="browser" value="remote-chrome"/>
+        <parameter name="testurl"
+                   value="https://ecommerce-playground.lambdatest.io/index.php?route=product/category&amp;path=57"/>
+        <classes>
+            <class name="OrgTest">
+                <methods>
+                    <include name="testAutoHealing_ecommerce_cart"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+
+    <test name="Auto Healing on LambdaTest - 3" enabled="true">
+        <parameter name="browser" value="remote-chrome"/>
+        <parameter name="testurl"
+                   value="http://localhost:8080/index.html"/>
+        <classes>
+            <class name="OrgTest">
+                <methods>
+                    <include name="testAutoHealing_local_page"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Test -->
+</suite>

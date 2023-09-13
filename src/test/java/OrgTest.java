@@ -14,7 +14,7 @@ import java.time.Duration;
 import static setup.DriverManager.getDriver;
 import static setup.DriverManager.status;
 
-public class AutoHealingTest extends BaseTest {
+public class OrgTest extends BaseTest {
     //WebDriver driver = null;
     private WebDriverWait webDriverWait;
     private Actions actionChains;
@@ -57,20 +57,14 @@ public class AutoHealingTest extends BaseTest {
             Thread.sleep(1000);
              */
 
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                     ("document.getElementById('mz-product-grid-image-44-212408').id='macbook-air-id'");
+            */
 
             /* New locator works, healed logic is not working fine. This needs to be commented later */
-            /* Update - 13/09/2023 Seems some issue */
-            /* WebElement elemMacBook = driver.findElement(By.id(
-                    "mz-product-grid-image-44-212408"));
-            */
-
-            /* Update - 13/09/2023 Needs to be debugged further,
-               the locator should be mz-product-grid-image-44-212408
-            */
             WebElement elemMacBook = driver.findElement(By.id(
-                    "macbook-air-id"));
+                    "mz-product-grid-image-44-212408"));
 
             Thread.sleep(1000);
 
@@ -93,8 +87,7 @@ public class AutoHealingTest extends BaseTest {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemQuickView));
              */
 
-            /* Update - 13/09/2023 Seems some issue */
-            /* Commenting for the time being */
+            /* Commented for now */
             /* jsExecutor.executeScript(
                     "document.getElementsByClassName('btn btn-quick-view quick-view-44')[0].className=" +
                             "'btn btn-quick-view quick-view-99'");
@@ -113,12 +106,16 @@ public class AutoHealingTest extends BaseTest {
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemBuyNowButton));
 
             /* Change the ID and than auto-heal with the original ID */
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                     ("document.getElementById('entry_212965').id='buy_later'");
+            */
 
             /* Change the innerText of the Button, only for Testing */
-            jsExecutor.executeScript(
+            /* Commented for now */
+            /* jsExecutor.executeScript(
                     "document.getElementsByClassName('text btn btn-md btn-primary btn-block btn-buynow button-buynow cart-44')[0].innerText='BUY LATER'");
+            */
 
             Thread.sleep(2000);
 
@@ -157,13 +154,17 @@ public class AutoHealingTest extends BaseTest {
             WebElement elemLastName = driver.findElement(By.id("input-lastname"));
             elemLastName.sendKeys("Testing12345");
 
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                    ("document.getElementById('input-email').id='email-address'");
+            */
 
             /* Only for testing, verify if the selector has changed from: */
             /* Old: name - email */
             /* New: name - email-address */
-            By newEmailAddr = By.id("email-address");
+            /* Commented for now */
+            /* By newEmailAddr = By.id("email-address"); */
+            By newEmailAddr = By.id("input-email");
             WebElement tempElement = driver.findElement(newEmailAddr);
             tempElement.sendKeys("testingemail4@gmail.com");
 
@@ -181,8 +182,10 @@ public class AutoHealingTest extends BaseTest {
             WebElement elemTel = driver.findElement(By.xpath("//input[@id='input-telephone']"));
             elemTel.sendKeys("12345678");
 
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                     ("document.getElementsByName('password')[0].name='password-new'");
+            */
 
             WebElement elemPass = driver.findElement(By.name("password"));
             elemPass.sendKeys("password");
@@ -190,8 +193,10 @@ public class AutoHealingTest extends BaseTest {
             WebElement elemPassConf = driver.findElement(By.name("confirm"));
             elemPassConf.sendKeys("password");
 
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                     ("document.getElementById('input-newsletter-yes').id='input-newsletter-dont-know'");
+            */
 
             /* Only for testing, verify if the selector has changed from: */
             /* Old: id - input-newsletter-yes */
@@ -243,8 +248,6 @@ public class AutoHealingTest extends BaseTest {
         try
         {
             /* Healing 1 : Change the ID of the Sign-up button */
-            jsExecutor.executeScript
-                    ("document.getElementById('signUp').id='signUp-Button'");
 
             WebElement elemSignUp = driver.findElement(By.id("signUp"));
             elemSignUp.click();
@@ -279,8 +282,10 @@ public class AutoHealingTest extends BaseTest {
 
             /* Change the name of the Email text-box, healing will be done in index.html */
             /* This is because the parent page is in the iFrame */
-            jsExecutor.executeScript
-                    ("document.getElementsByClassName('email')[0].name='mail'");
+            /* Commented for now */
+            /* jsExecutor.executeScript
+                    ("document.getElementsByClassName('email-address')[0].name='mail'");
+            */
 
             WebElement elemEmail = driver.findElement(By.name("email"));
             elemEmail.sendKeys("himanshu.blogger@gmail.com");
@@ -288,8 +293,10 @@ public class AutoHealingTest extends BaseTest {
 
             /* Change the ClassName of the password field, healing will not be done */
             /* This is because the parent page is in the iFrame */
-            jsExecutor.executeScript
+            /* Commented for now */
+            /* jsExecutor.executeScript
                     ("document.getElementsByName('password')[0].className='new-password'");
+            */
 
             WebElement elemNewPwd = driver.findElement(By.className("password"));
             elemNewPwd.sendKeys("Password");
