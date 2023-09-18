@@ -68,7 +68,7 @@ To start with, we run the tests (with original locators) by invoking ```make org
 
 Test execution is triggered with all three tests running in parallel on LambdaTest Selenium Grid.
 
-<img width="1403" alt="make-org-test-running" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/266d566e-8840-4eda-b911-d61849fe065a">
+<img width="1406" alt="Make-Org-Test-New" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/52a83cd0-a469-419a-a6d5-23383f31a825">
 
 <img width="1400" alt="make-org-test-completed" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/8d1f5c87-440c-4da4-b654-6cc1303fd417">
 
@@ -82,7 +82,7 @@ Shown below is the execution snapshot which indicates that the test execution wa
 
 The test code with modified locators is present in *AutoHealingTest.java* Run the command ```make auto-heal``` to execute the tests that have locators healed by the auto-healing algorithm.
 
-<img width="1399" alt="Test_auto-healing-terminal-1" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/5cd06ba4-2c1e-48c1-be94-0c35f492d2ac">
+<img width="1407" alt="Make-Auto-Heal-New" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/a80e3854-e6cc-4582-9b2c-c310ce1b45d5">
 
 <img width="1429" alt="Test_auto-healing-dashboard-1" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/2720df45-90f3-4034-b753-6a2ad4d19512">
 
