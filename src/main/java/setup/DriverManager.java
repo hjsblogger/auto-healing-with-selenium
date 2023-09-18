@@ -52,7 +52,6 @@ public class DriverManager
     }
 
     public static WebDriver getDriver () {
-        //return driver;
         return driverLocal.get();
     }
 

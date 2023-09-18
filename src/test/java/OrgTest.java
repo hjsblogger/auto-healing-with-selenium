@@ -30,7 +30,6 @@ public class OrgTest extends BaseTest {
         webDriverWait = new WebDriverWait(driver,
                 Duration.ofSeconds(ELEM_TIMEOUT_DUR));
         jsExecutor = (JavascriptExecutor) driver;
-        /* Not a good practice, used for testing */
         actionChains = new Actions(driver);
         driver.get(testURL);
 
@@ -47,20 +46,12 @@ public class OrgTest extends BaseTest {
         WebDriver driver = getDriver();
         try
         {
-            WebElement nested_elements = webDriverWait.until(ExpectedConditions.visibilityOf(driver.findElement(
-                    By.xpath("//div[@id='entry_212391']//div[@id='entry_212408']//div[@class='row']"))));
-
             /* Avoid scrolling, directly scroll into the view */
             /*
             long start_height = (long) jsExecutor.executeScript("return document.documentElement.scrollHeight;");
             jsExecutor.executeScript("window.scrollTo(0, " + start_height + ")");
             Thread.sleep(1000);
              */
-
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementById('mz-product-grid-image-44-212408').id='macbook-air-id'");
-            */
 
             /* New locator works, healed logic is not working fine. This needs to be commented later */
             WebElement elemMacBook = driver.findElement(By.id(
@@ -81,18 +72,6 @@ public class OrgTest extends BaseTest {
                 e.printStackTrace();
             }
 
-            /* Works Fine, instead I used XPath * /
-            WebElement elemQuickView = driver.findElement(By.cssSelector(
-                    ".quick-view-44"));
-            webDriverWait.until(ExpectedConditions.elementToBeClickable(elemQuickView));
-             */
-
-            /* Commented for now */
-            /* jsExecutor.executeScript(
-                    "document.getElementsByClassName('btn btn-quick-view quick-view-44')[0].className=" +
-                            "'btn btn-quick-view quick-view-99'");
-            */
-
             WebElement elemQuickView = driver.findElement(By.xpath(
                     "//button[@class='btn btn-quick-view quick-view-44']"));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemQuickView));
@@ -105,25 +84,13 @@ public class OrgTest extends BaseTest {
                     "entry_212965"));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemBuyNowButton));
 
-            /* Change the ID and than auto-heal with the original ID */
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementById('entry_212965').id='buy_later'");
-            */
-
-            /* Change the innerText of the Button, only for Testing */
-            /* Commented for now */
-            /* jsExecutor.executeScript(
-                    "document.getElementsByClassName('text btn btn-md btn-primary btn-block btn-buynow button-buynow cart-44')[0].innerText='BUY LATER'");
-            */
-
             Thread.sleep(2000);
 
             elemBuyNowButton = driver.findElement(By.id("entry_212965"));
             elemBuyNowButton.click();
 
             WebElement elemContinueButton = driver.findElement(By.cssSelector(
-                    "#button-save"));
+                "#button-save"));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(elemContinueButton));
 
             /* We can do some checks later, raise assert if failure */
@@ -154,16 +121,6 @@ public class OrgTest extends BaseTest {
             WebElement elemLastName = driver.findElement(By.id("input-lastname"));
             elemLastName.sendKeys("Testing12345");
 
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                   ("document.getElementById('input-email').id='email-address'");
-            */
-
-            /* Only for testing, verify if the selector has changed from: */
-            /* Old: name - email */
-            /* New: name - email-address */
-            /* Commented for now */
-            /* By newEmailAddr = By.id("email-address"); */
             By newEmailAddr = By.id("input-email");
             WebElement tempElement = driver.findElement(newEmailAddr);
             tempElement.sendKeys("testingemail4@gmail.com");
@@ -182,10 +139,6 @@ public class OrgTest extends BaseTest {
             WebElement elemTel = driver.findElement(By.xpath("//input[@id='input-telephone']"));
             elemTel.sendKeys("12345678");
 
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementsByName('password')[0].name='password-new'");
-            */
 
             WebElement elemPass = driver.findElement(By.name("password"));
             elemPass.sendKeys("password");
@@ -193,14 +146,6 @@ public class OrgTest extends BaseTest {
             WebElement elemPassConf = driver.findElement(By.name("confirm"));
             elemPassConf.sendKeys("password");
 
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementById('input-newsletter-yes').id='input-newsletter-dont-know'");
-            */
-
-            /* Only for testing, verify if the selector has changed from: */
-            /* Old: id - input-newsletter-yes */
-            /* New: name - input-newsletter-dont-know */
             By newNewsletter = By.id("input-newsletter-yes");
             WebElement tempElementNewsletter = driver.findElement(newNewsletter);
             jsExecutor.executeScript("arguments[0].checked = true;",
@@ -247,12 +192,9 @@ public class OrgTest extends BaseTest {
 
         try
         {
-            /* Healing 1 : Change the ID of the Sign-up button */
-
             WebElement elemSignUp = driver.findElement(By.id("signUp"));
             elemSignUp.click();
 
-            /* Healing 2 : Name of the text-box is changed from first-name to first-name-new */
             WebElement elemFirstName = driver.findElement(By.name("first-name"));
             webDriverWait.until(ExpectedConditions.visibilityOf(elemFirstName));
 
@@ -280,23 +222,9 @@ public class OrgTest extends BaseTest {
             WebElement elemModFirstName = driver.findElement(By.name("first-name"));
             elemModFirstName.sendKeys("Himanshu Sheth");
 
-            /* Change the name of the Email text-box, healing will be done in index.html */
-            /* This is because the parent page is in the iFrame */
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementsByClassName('email-address')[0].name='mail'");
-            */
-
             WebElement elemEmail = driver.findElement(By.name("email"));
             elemEmail.sendKeys("himanshu.blogger@gmail.com");
             Thread.sleep(500);
-
-            /* Change the ClassName of the password field, healing will not be done */
-            /* This is because the parent page is in the iFrame */
-            /* Commented for now */
-            /* jsExecutor.executeScript
-                    ("document.getElementsByName('password')[0].className='new-password'");
-            */
 
             WebElement elemNewPwd = driver.findElement(By.className("password"));
             elemNewPwd.sendKeys("Password");
