@@ -17,6 +17,12 @@ The [Demo Login Page](https://codepen.io/FlorinPop17/pen/vPKWjd) is hosted local
 
 For localhost testing, we need to start the tunnel. To do the same, download [Underpass](https://www.lambdatest.com/support/docs/underpass-tunnel-application/#downloading--installing-the-underpass-tunnel-application) from LambdaTest to establish an SSH tunnel between the OS & LambdaTest cloud server(s).
 
+<img width="798" alt="UnderPass" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/987a5aa4-ef8d-45dd-a4b0-f8b6bcbf4991">
+
+Load the [demo login page](https://github.com/hjsblogger/auto-healing-with-selenium/tree/main/local-project/dist/index.html) by triggering the ```php -S localhost:8080``` command on the terminal.
+
+<img width="794" alt="TestMethod_3 1" src="https://github.com/hjsblogger/auto-healing-with-selenium/assets/1688653/541fc76f-8330-4689-b32a-760df04565d8">
+
 Before running the tests on LambdaTest Selenium Grid, you need to set the environment variables - *LT_USERNAME* and *LT_ACCESS_KEY*. Here is how you can do the same:
 
 ## Configure Environment Variables
