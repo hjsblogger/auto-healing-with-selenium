@@ -1,8 +1,8 @@
 # Define variables
 MVN_CLEAN := mvn clean
 MVN_TEST := mvn compile test
-ORG_SUITE_NAME := testng_org.xml
-HEALING_SUITE_NAME := testng_autohealing.xml
+ORG_SUITE_NAME := xml/testng_org.xml
+HEALING_SUITE_NAME := xml/testng_autohealing.xml
 PROJECT_NAME := auto-healing using Selenium on LambdaTest
 
 .PHONY: set-env
